@@ -109,7 +109,7 @@ function captureScreen() {
     chrome.browserAction.onClicked.addListener(function() {
         sendMessage({type: 'start-screenshots'});
     });
-    chrome.extension.onRequest.addListener(gotMessage);
+    chrome.extension.onMessage.addListener(gotMessage);
     function gotMessage(request, sender, sendResponse) {
         if (request.type == "coords")
             capture(request.coords);
@@ -117,7 +117,7 @@ function captureScreen() {
     }
     function sendMessage(msg) {
         chrome.tabs.getSelected(null, function(tab) {
-            chrome.tabs.sendRequest(tab.id, msg, function(response) {});
+          chrome.tabs.sendMessage(tab.id, msg, function(response) {});
         });
     };
     // --
