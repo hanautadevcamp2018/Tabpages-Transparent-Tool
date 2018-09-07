@@ -19,5 +19,11 @@
         "x_page": "background.html",
         "scripts": ["background.js"],
         "persistent": false
-    }
+    },
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"js": ["content.js"]
+		}
+    ]
 }

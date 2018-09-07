@@ -71,8 +71,11 @@ function captureScreen() {
         x: 200,
         y: 200
     };
+
+    var img;
+        
     function cropData(str, coords, callback) {
-        var img = new Image();
+        img = new Image();
         
         img.onload = function() {
             var canvas = document.createElement('canvas');
@@ -82,19 +85,6 @@ function captureScreen() {
             var ctx = canvas.getContext('2d');
         
             ctx.drawImage(img, coords.x, coords.y, coords.w, coords.h, 0, 0, coords.w, coords.h);
-            
-            var fd = new FormData();
-            fd.append('image', dataURItoBlob(canvas.toDataURL()));
-            
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if ( xhr.readyState == 4 ) {
-                    callback();
-                }
-            }
-            
-            xhr.open('POST', Constants.saveURL);
-            xhr.send(fd);
         };
         
         img.src = str;

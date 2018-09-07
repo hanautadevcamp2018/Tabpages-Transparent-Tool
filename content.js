@@ -2,7 +2,7 @@
 // messages
 //
 
-chrome.extension.onRequest.addListener(gotMessage);
+chrome.extension.onMessage.addListener(gotMessage);
 
 function gotMessage(request, sender, sendResponse) {
 	if (request.type == "start-screenshots")
@@ -23,7 +23,7 @@ function endScreenshot(coords) {
 }
 
 function sendMessage(msg) {
-	chrome.extension.sendRequest(msg, function(response) {});
+	chrome.extension.sendMessage(msg, function(response) {});
 };
 
 // 
