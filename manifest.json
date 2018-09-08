@@ -23,7 +23,19 @@
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
-			"js": ["content.js"]
+            "js": [
+                "bower_components/jquery/dist/jquery.js",
+                "bower_components/jquery-ui/ui/jquery-ui.js",
+                "bower_components/jquery-ui/ui/jquery-ui.min.js",
+                "bower_components/dropzone/downloads/dropzone.js",
+                "local-storage.js",
+                "content.js",
+                "ovrlay-content-script.js"
+            ],
+            "css": [
+                "styles/ovrlay.css",
+                "bower_components/dropzone/downloads/css/basic.css"
+            ]
 		}
     ]
 }

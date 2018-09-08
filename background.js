@@ -1,12 +1,23 @@
 // Event handlers
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 
+/*
 chrome.contextMenus.create({
   id : "exec",
   title: "実行！！",
   contexts: ["all"],
   type: "normal"
 });
+*/
+
+chrome.contextMenus.create({
+  "id" : "paste",
+  "title" : "画像を貼り付け",
+  "type" : "normal",
+  "contexts" : ["all"]
+});
+
+
 
 /**
  * Handles click on context menu
@@ -15,22 +26,38 @@ chrome.contextMenus.create({
  */
 function onClickHandler(info) {
   console.log(info);
-  alert("実行！!!!");
-/*
-  var id;
 
-  id = info.menuItemId;
+  var id = info.menuItemId;
 
   switch(id) {
-      case 'square':
+    case 'paste' :
+      alert("貼り付ける");
+      initialiseOverlay();
+
+
+    case 'square':
           sendMessage('drawSquare', info);
           break;
       case 'capture':
           captureScreen();
           break;
   }
-  */
 }
+
+function initialiseOverlay() {
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            toggle: true
+        }, function(response) {
+
+        });
+    });
+}
+
+
 
 /**
  * Sends a message to script.js
