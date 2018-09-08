@@ -81,7 +81,8 @@ function createOverlayHtml() {
 
 
     $dropzoneToggle = $('<a href="#" class="control control-upload">Upload<br>Image</a>')
-        .click(toggleDropzone);
+        .click(removeOverlayHtml);
+        //.click(toggleDropzone);
 
 
     $dropzone = $('<div id="dropzone" class="dropzone" />');
