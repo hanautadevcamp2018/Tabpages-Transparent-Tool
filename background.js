@@ -31,8 +31,9 @@ function onClickHandler(info) {
 
   switch(id) {
     case 'paste' :
-      alert("貼り付ける");
+      //alert("貼り付ける");
       initialiseOverlay();
+      break;
 
 
     case 'square':
@@ -50,7 +51,8 @@ function initialiseOverlay() {
         currentWindow: true
     }, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
-            toggle: true
+            toggle: true,
+            imgsrc : img.src
         }, function(response) {
 
         });

@@ -1,6 +1,9 @@
+var imgsrc;
+
 chrome.runtime.onMessage.addListener(function(request, response) {
     console.log("ovrlay-content-script!");
     if (request.toggle) {
+        imgsrc = request.imgsrc;
         toggleOverlay();
     }
 });
@@ -53,7 +56,7 @@ function createOverlayHtml() {
     loadSettings();
 
     $img = $('<img class="ovrlay-image">')
-        .prop('src', settings.imageUrl)
+        .prop('src', imgsrc /*settings.imageUrl*/)
         .css(settings.css)
         .draggable({
             stop: saveSettings
@@ -93,7 +96,24 @@ function createOverlayHtml() {
 
     isOverlayHtmlCreated = true;
 
-    initDropzone();
+    //initDropzone();
+
+    $img.prop('src', imgsrc);
+    //$dropzone.removeAllFiles();
+
+    settings.css = {
+        top: 40,
+        left: 80
+    }
+
+    $img.css(settings.css);
+
+    settings.imageScale = 1;
+
+    //settings.imageUrl = imageUrl;
+    saveSettings();
+
+    $dropzone.hide();
 
 }
 
@@ -157,7 +177,7 @@ function initDropzone() {
     dropzone.on('success', function(file, response) {
         var imageUrl;
 
-        //var bgImg = img;
+        console.log(imgsrc);
 
         if (response.success) {
 
