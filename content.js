@@ -50,7 +50,7 @@ function keyDown(e) {
 function mouseDown(e) {
     e.preventDefault();
 
-    startPos = {x: e.pageX, y: e.pageY};
+    startPos = {x: e.clientX, y: e.clientY};
 
     ghostElement = document.createElement('div');
     ghostElement.style.background = 'blue';
@@ -73,7 +73,7 @@ function mouseMove(e) {
     e.preventDefault();
 
     var nowPos = {x: e.pageX, y: e.pageY};
-    var diff = {x: nowPos.x - startPos.x, y: nowPos.y - startPos.y};
+    var diff = {x: e.clientX - startPos.x, y: e.clientY - startPos.y};
 
     ghostElement.style.width = diff.x + 'px';
     ghostElement.style.height = diff.y + 'px';
@@ -85,7 +85,7 @@ function mouseUp(e) {
     e.preventDefault();
 
     var nowPos = {x: e.pageX, y: e.pageY};
-    var diff = {x: nowPos.x - startPos.x, y: nowPos.y - startPos.y};
+    var diff = {x: e.clientX - startPos.x, y: e.clientY - startPos.y};
 
     document.removeEventListener('mousemove', mouseMove, false);
     document.removeEventListener('mouseup', mouseUp, false);
