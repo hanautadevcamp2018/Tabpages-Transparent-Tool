@@ -93,22 +93,23 @@ var Constants = {
     y: 200
 };
 
-var img;
+var img = new Image();
 
 function cropData(str, coords, callback) {
-    img = new Image();
+    contextImg = new Image();
+    contextImg.src = str;
 
-    img.onload = function () {
+    contextImg.onload = function () {
         var canvas = document.createElement('canvas');
         canvas.width = coords.w;
         canvas.height = coords.h;
 
         var ctx = canvas.getContext('2d');
+        ctx.drawImage(contextImg, coords.x, coords.y, coords.w, coords.h, 0, 0, coords.w, coords.h);
 
-        ctx.drawImage(img, coords.x, coords.y, coords.w, coords.h, 0, 0, coords.w, coords.h);
+        img.src = canvas.toDataURL();
     };
 
-    img.src = str;
 }
 
 function capture(coords) {
