@@ -1,6 +1,6 @@
 var imgsrc;
 
-chrome.runtime.onMessage.addListener(function(request, response) {
+chrome.runtime.onMessage.addListener(function (request, response) {
     console.log("ovrlay-content-script!");
     if (request.toggle) {
         imgsrc = request.imgsrc;
@@ -30,7 +30,7 @@ var $img, $overlay,
 
 init();
 
-function init(){
+function init() {
     loadSettings();
     if (settings.visible) {
         toggleOverlay();
@@ -152,13 +152,13 @@ function zoomOut(e) {
     setScale();
 }
 
-function opacityInc(e){
+function opacityInc(e) {
     e.preventDefault();
     settings.css.opacity = Math.min(1, parseFloat(settings.css.opacity) + 0.05);
     setScale();
 }
 
-function opacityDec(e){
+function opacityDec(e) {
     e.preventDefault();
     settings.css.opacity = Math.max(0.05, settings.css.opacity - 0.05);
     setScale();
@@ -174,7 +174,7 @@ function initDropzone() {
         paramName: 'file'
     });
 
-    dropzone.on('success', function(file, response) {
+    dropzone.on('success', function (file, response) {
         var imageUrl;
 
         console.log(imgsrc);
@@ -204,7 +204,7 @@ function initDropzone() {
 
     })
 
-    dropzone.on('error', function(file, response) {
+    dropzone.on('error', function (file, response) {
         alert(response.errorMessage);
         dropzone.removeAllFiles();
 
