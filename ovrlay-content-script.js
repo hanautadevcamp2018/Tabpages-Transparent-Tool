@@ -40,10 +40,13 @@ function init() {
 
 function toggleOverlay() {
 
-    if (!isOverlayHtmlCreated) {
-        createOverlayHtml();
-        setScale();
+    if (isOverlayHtmlCreated) {
+        removeOverlayHtml();
     }
+
+    createOverlayHtml();
+    setScale();
+
     $overlay.toggle();
 
     settings.visible = $overlay.is(':visible');
@@ -115,6 +118,10 @@ function createOverlayHtml() {
 
     $dropzone.hide();
 
+}
+
+function removeOverlayHtml(){
+    $overlay.remove();
 }
 
 function saveSettings() {

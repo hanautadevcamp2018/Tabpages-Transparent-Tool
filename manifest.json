@@ -18,7 +18,7 @@
     "background": {
         "x_page": "background.html",
         "scripts": ["background.js"],
-        "persistent": false
+        "persistent": true
     },
 	"content_scripts": [
 		{
